@@ -111,7 +111,7 @@ jobs:
           repository: chenyem/dns
           tag_name: v${{ env.version }}
           name: idns v${{ env.version }}
-          token: ${{ GITHUB_TOKEN }}
+          token: ${{ TOKEN }}
           body: See the assets to download this version and install.
           prerelease: false
           generate_release_notes: false
@@ -139,7 +139,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - name: Updater JSON
-        run: pnpm updater --token=${{ GITHUB_TOKEN }}
+        run: pnpm updater --token=${{ TOKEN }}
 
       - name: Only support platforms (fix check_update error )
         run: pnpm support --platforms=darwin,darwin-x86_64
@@ -147,7 +147,7 @@ jobs:
       - name: Deploy install.json
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ GITHUB_TOKEN }}
+          github_token: ${{ TOKEN }}
           external_repository: chenyem/dns
           publish_dir: ./updater
           # force_orphan: true
