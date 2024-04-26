@@ -21,10 +21,10 @@ jobs:
             os: macos-latest
             arch: x86_64
             target: x86_64-apple-darwin
-          - build: macos
-            os: macos-latest
-            arch: aarch64
-            target: aarch64-apple-darwin
+          # - build: macos
+          #   os: macos-latest
+          #   arch: aarch64
+          #   target: aarch64-apple-darwin
           # - build: windows
           #   os: windows-latest
           #   arch: x86_64
@@ -97,18 +97,8 @@ jobs:
           name: artifacts-x86_64
           path: artifacts/x86_64
 
-      - name: Download aarch64 artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: artifacts-aarch64
-          path: artifacts/aarch64
-
       - name: Rename artifacts
         run: |
-          mv "artifacts/aarch64/dmg/idns_${{ env.version }}_aarch64.dmg" "artifacts/idns_${{ env.version }}_macos_aarch64.dmg"
-          mv "artifacts/aarch64/macos/idns.app.tar.gz" "artifacts/idns_${{ env.version }}_macos_aarch64.app.tar.gz"
-          mv "artifacts/aarch64/macos/idns.app.tar.gz.sig" "artifacts/idns_${{ env.version }}_macos_aarch64.app.tar.gz.sig"
-
           mv "artifacts/x86_64/dmg/idns_${{ env.version }}_x64.dmg" "artifacts/idns_${{ env.version }}_macos_x86_64.dmg"
           mv "artifacts/x86_64/macos/idns.app.tar.gz" "artifacts/idns_${{ env.version }}_macos_x86_64.app.tar.gz"
           mv "artifacts/x86_64/macos/idns.app.tar.gz.sig" "artifacts/idns_${{ env.version }}_macos_x86_64.app.tar.gz.sig"
@@ -151,7 +141,7 @@ jobs:
         run: pnpm updater --token=${{ secrets.GITHUB_TOKEN }}
 
       - name: Only support platforms (fix check_update error )
-        run: pnpm support --platforms=darwin,darwin-aarch64,darwin-x86_64
+        run: pnpm support --platforms=darwin,darwin-x86_64
 
       - name: Deploy install.json
         uses: peaceiris/actions-gh-pages@v3
