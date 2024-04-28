@@ -53,14 +53,12 @@ jobs:
 
     runs-on: ${{ matrix.config.os }}
     steps:
-      - uses: actions/checkout@v3
-      - name: setup node
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - name: setup node 
+        uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: "pnpm"
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
         with:
