@@ -21,6 +21,10 @@ jobs:
             os: macos-latest
             arch: x86_64
             target: x86_64-apple-darwin
+          - build: macos
+            os: macos-latest
+            arch: universal
+            target: universal-apple-darwin 
           # - build: macos
           #   os: macos-latest
           #   arch: aarch64
@@ -96,12 +100,20 @@ jobs:
         with:
           name: artifacts-x86_64
           path: artifacts/x86_64
+      - name: Download x86_64 artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: artifacts-universal
+          path: artifacts/universal     
 
       - name: Rename artifacts
         run: |
           mv "artifacts/x86_64/dmg/idns_${{ env.version }}_x64.dmg" "artifacts/idns_${{ env.version }}_macos_x86_64.dmg"
           mv "artifacts/x86_64/macos/idns.app.tar.gz" "artifacts/idns_${{ env.version }}_macos_x86_64.app.tar.gz"
           mv "artifacts/x86_64/macos/idns.app.tar.gz.sig" "artifacts/idns_${{ env.version }}_macos_x86_64.app.tar.gz.sig"
+          mv "artifacts/universal/dmg/idns_${{ env.version }}_x64.dmg" "artifacts/idns_${{ env.version }}_macos_x86_64.dmg"
+          mv "artifacts/universal/macos/idns.app.tar.gz" "artifacts/idns_${{ env.version }}_macos_x86_64.app.tar.gz"
+          mv "artifacts/universal/macos/idns.app.tar.gz.sig" "artifacts/idns_${{ env.version }}_macos_x86_64.app.tar.gz.sig"
 
       - name: Create Release
         uses: softprops/action-gh-release@master
