@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@actions/github': ^5.1.0
+  '@actions/github': ^5.1.1
   '@rollup/plugin-alias': ^4.0.2
   '@rollup/plugin-inject': ^5.0.3
   '@tauri-apps/api': ^1.2.0
@@ -10,7 +10,8 @@ specifiers:
   '@types/minimist': ^1.2.2
   '@types/node': ^18.7.10
   '@vitejs/plugin-vue': ^3.0.1
-  minimist: ^1.2.7
+  kleur: ^4.1.5
+  minimist: ^1.2.8
   naive-ui: ^2.34.2
   node-fetch: ^3.2.10
   typescript: ^4.6.4
@@ -23,6 +24,7 @@ specifiers:
 dependencies:
   '@rollup/plugin-inject': 5.0.5
   '@tauri-apps/api': 1.5.3
+  kleur: 4.1.5
   vue: 3.4.21_typescript@4.9.5
 
 devDependencies:
@@ -1015,6 +1017,11 @@ packages:
   /jsonc-parser/3.2.1:
     resolution: {integrity: sha512-AilxAyFOAcK5wA1+LeaySVBrHsGQvUFCDWXKpZjzaL0PqW+xfBOttn8GNtWKFWqneyMZj41MWF9Kl6iPWLwgOA==}
     dev: true
+
+  /kleur/4.1.5:
+    resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
+    engines: {node: '>=6'}
+    dev: false
 
   /local-pkg/0.4.3:
     resolution: {integrity: sha512-SFppqq5p42fe2qcZQqqEOiVRXl+WCP1MdT6k7BDEW1j++sp5fIY+/fdRQitvKgB5BrBcmrs5m/L0v2FrU5MY1g==}
