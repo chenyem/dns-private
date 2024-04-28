@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 
 .history
+
+# Added by cargo
+
+/target
