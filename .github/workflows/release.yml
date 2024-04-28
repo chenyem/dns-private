@@ -148,6 +148,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.TAURI_TOKEN }}
+          personal_token: ${{ secrets.TAURI_TOKEN }}
           external_repository: chenyem/dns
           publish_dir: ./updater
           # force_orphan: true

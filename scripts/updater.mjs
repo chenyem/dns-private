@@ -87,6 +87,7 @@ export default async function updater() {
     let sig = "";
     if (/.sig$/.test(asset.name)) {
       sig = await getSignature(asset.browser_download_url);
+      console.log(c.yellow("sig"), c.blue(`${sig}`));
     }
     platforms.forEach((platform) => {
       // mac aarch64
