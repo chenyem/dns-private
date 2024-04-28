@@ -40,15 +40,15 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - os: ubuntu-latest
-            arch: x86_64
-            rust_target: x86_64-unknown-linux-gnu
+          # - os: ubuntu-latest
+          #   arch: x86_64
+          #   rust_target: x86_64-unknown-linux-gnu
           - os: macos-latest
             arch: aarch64
             rust_target: x86_64-apple-darwin,aarch64-apple-darwin
-          - os: windows-latest
-            arch: x86_64
-            rust_target: x86_64-pc-windows-msvc
+          # - os: windows-latest
+          #   arch: x86_64
+          #   rust_target: x86_64-pc-windows-msvc
 
     runs-on: ${{ matrix.config.os }}
     steps:
@@ -57,7 +57,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'yarn'
+          cache: "yarn"
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
         with:
@@ -74,15 +74,11 @@ jobs:
         run: yarn install # change this to npm or pnpm depending on which one you use
       - uses: tauri-apps/tauri-action@v0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TAURI_TOKEN }}
           TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
           TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
-          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
-          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
-          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
-          APPLE_ID: ${{ secrets.APPLE_ID }}
-          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
-          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          owner: chenyem
+          repo: dns
         with:
           releaseId: ${{ needs.create-release.outputs.release_id }}
           args: ${{ matrix.config.os == 'macos-latest' && '--target universal-apple-darwin' || '' }}
