@@ -7,7 +7,7 @@
   },
   "package": {
     "productName": "mdns",
-    "version": "0.0.0"
+    "version": "0.0.18"
   },
   "tauri": {
     "allowlist": {
