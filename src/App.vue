@@ -6,7 +6,7 @@ import Greet from "./components/Greet.vue";
 
 <template>
   <div class="container">
-    <h1>Welcome to Tauri!</h1>
+    <h1>Welcome to Tauri! v.0.0.19</h1>
 
     <div class="row">
       <a href="https://vitejs.dev" target="_blank">
@@ -28,13 +28,9 @@ import Greet from "./components/Greet.vue";
       +
       <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
       +
-      <a href="https://github.com/tauri-apps/tauri-vscode" target="_blank"
-        >Tauri</a
-      >
+      <a href="https://github.com/tauri-apps/tauri-vscode" target="_blank">Tauri</a>
       +
-      <a href="https://github.com/rust-lang/rust-analyzer" target="_blank"
-        >rust-analyzer</a
-      >
+      <a href="https://github.com/rust-lang/rust-analyzer" target="_blank">rust-analyzer</a>
     </p>
 
     <Greet />
