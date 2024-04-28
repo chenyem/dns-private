@@ -54,7 +54,8 @@ jobs:
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@v4
-      - name: setup node 
+      - uses: pnpm/action-setup@v3
+      - name: setup node
         uses: actions/setup-node@v4
         with:
           node-version: 18
