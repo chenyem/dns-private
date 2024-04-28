@@ -83,10 +83,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TAURI_TOKEN }}
           TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
           TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
-          owner: chenyem
-          repo: dns
         with:
           releaseId: ${{ needs.create-release.outputs.release_id }}
+          tagName: v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version.
+          releaseName: "App v__VERSION__"
+          releaseBody: "See the assets to download this version and install."
+          releaseDraft: false
+          prerelease: false
+          owner: chenyem
+          repo: dns
           args: ${{ matrix.config.os == 'macos-latest' && '--target universal-apple-darwin' || '' }}
 
   publish-release:
