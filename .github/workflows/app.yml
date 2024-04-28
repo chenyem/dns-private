@@ -28,8 +28,8 @@ jobs:
           github-token: ${{ secrets.TAURI_TOKEN }}
           script: |
             const { data } = await github.rest.repos.getLatestRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
+              owner: chenyem,
+              repo: dns,
             })
             return data.id
 
