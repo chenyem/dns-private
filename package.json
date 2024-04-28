@@ -8,7 +8,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "tauri": "tauri",
-    "release": "tr release"
+    "release": "tr release --git"
   },
   "dependencies": {
     "@tauri-apps/api": "^1",
