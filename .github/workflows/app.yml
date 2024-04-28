@@ -25,6 +25,7 @@ jobs:
         id: create-release
         uses: actions/github-script@v6
         with:
+          github-token: ${{ secrets.TAURI_TOKEN }}
           script: |
             const { data } = await github.rest.repos.getLatestRelease({
               owner: context.repo.owner,
