@@ -6,14 +6,13 @@ on:
     tags:
       - "v*"
 
-jobs:
+jobs: #查询最近的 releaseId 返回
   create-release:
     permissions:
       contents: write
     runs-on: ubuntu-latest
     outputs:
       release_id: ${{ steps.create-release.outputs.result }}
-
     steps:
       - uses: actions/checkout@v3
       - name: setup node
@@ -36,8 +35,6 @@ jobs:
 
   build-tauri:
     needs: create-release
-    outputs:
-      release_id: ${{ steps.tauri-build.outputs.releaseId }}
     permissions:
       contents: write
     strategy:
@@ -88,7 +85,7 @@ jobs:
           TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
           TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
         with:
-          # releaseId: ${{ needs.create-release.outputs.release_id }}
+          releaseId: ${{ needs.create-release.outputs.release_id }}
           tagName: v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version.
           releaseName: "App v__VERSION__"
           releaseBody: "See the assets to download this version and install."
@@ -108,9 +105,7 @@ jobs:
         id: publish-release
         uses: actions/github-script@v6
         env:
-          # release_id: ${{ needs.create-release.outputs.release_id }}
-          release_id: ${{ needs.build-tauri.outputs.release_id }}
-
+          release_id: ${{ needs.create-release.outputs.release_id }}
         with:
           github-token: ${{ secrets.TAURI_TOKEN }}
           script: |
