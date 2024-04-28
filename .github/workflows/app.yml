@@ -2,8 +2,9 @@ name: Release App
 
 on:
   workflow_dispatch:
-  release:
-    types: [published]
+  push:
+    tags:
+      - "v*"
 
 jobs:
   create-release:
@@ -35,21 +36,23 @@ jobs:
 
   build-tauri:
     needs: create-release
+    outputs:
+      release_id: ${{ steps.tauri-build.outputs.releaseId }}
     permissions:
       contents: write
     strategy:
       fail-fast: false
       matrix:
         config:
-          - os: ubuntu-latest
-            arch: x86_64
-            target: x86_64-unknown-linux-gnu
+          # - os: ubuntu-latest
+          #   arch: x86_64
+          #   target: x86_64-unknown-linux-gnu
           - os: macos-latest
             arch: aarch64
             target: x86_64-apple-darwin,aarch64-apple-darwin
-          - os: windows-latest
-            arch: x86_64
-            target: x86_64-pc-windows-msvc
+          # - os: windows-latest
+          #   arch: x86_64
+          #   target: x86_64-pc-windows-msvc
 
     runs-on: ${{ matrix.config.os }}
     steps:
@@ -79,19 +82,19 @@ jobs:
       - name: install frontend dependencies
         run: pnpm install --frozen-lockfile # change this to npm or pnpm depending on which one you use
       - uses: tauri-apps/tauri-action@v0
+        id: tauri-build
         env:
           GITHUB_TOKEN: ${{ secrets.TAURI_TOKEN }}
           TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
           TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
         with:
-          releaseId: ${{ needs.create-release.outputs.release_id }}
-          tagName: v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version.
+          # releaseId: ${{ needs.create-release.outputs.release_id }}
+          tagName: app-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version.
           releaseName: "App v__VERSION__"
           releaseBody: "See the assets to download this version and install."
-          releaseDraft: false
-          prerelease: false
           owner: chenyem
           repo: dns
+          # macos通用dmg
           args: ${{ matrix.config.os == 'macos-latest' && '--target universal-apple-darwin' || '' }}
 
   publish-release:
@@ -105,7 +108,9 @@ jobs:
         id: publish-release
         uses: actions/github-script@v6
         env:
-          release_id: ${{ needs.create-release.outputs.release_id }}
+          # release_id: ${{ needs.create-release.outputs.release_id }}
+          release_id: ${{ needs.build-tauri.outputs.release_id }}
+
         with:
           github-token: ${{ secrets.TAURI_TOKEN }}
           script: |
