@@ -33,9 +33,6 @@
       "endpoints": [
         "https://github.com/chenyem/dns/releases/latest/download/latest.json"
       ],
-      "windows": {
-        "installMode": "passive"
-      },
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDZFMkJGQUY4NDQ3Mzk4MDQKUldRRW1ITkUrUG9yYnQyTTlrSGY5dU5lS3dYZVNkeHU5WUMvUEpsV1A2Q1lZNVU3TEtXOHhIRzkK"
     },
     "bundle": {
